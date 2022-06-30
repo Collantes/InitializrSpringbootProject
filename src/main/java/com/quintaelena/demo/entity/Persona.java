@@ -30,8 +30,8 @@ public class Persona implements Serializable {
     @Column(name = "pers_ap_paterno")
     private String persApPaterno;
 
-    @Column(name = "pers_ap_materno") // APELLIDO_PATERNO, AP_PATERNO
-    private String persApMaterno; // apellidoPaterno
+    @Column(name = "pers_ap_materno")
+    private String persApMaterno;
 
     @Column(name = "pers_nombres")
     private String persNombres;
