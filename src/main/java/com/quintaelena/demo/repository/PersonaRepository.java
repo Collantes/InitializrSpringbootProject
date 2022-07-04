@@ -15,6 +15,6 @@ import org.springframework.data.repository.CrudRepository;
  */
 @Repository
 public interface PersonaRepository extends CrudRepository<Persona, Long> {
-
+    // Query Method JPA
     List<Persona> findByTipoDocumento(Long tidoId);
 }

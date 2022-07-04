@@ -29,22 +29,26 @@ function listar() {
     });
 }
 
-function listarTipoDocumento() {
+function listarTipoDocumento(selected) {
     $.ajax({
         url: "/tipoDocumento/all",
         type: 'GET',
         success: function (x) {
-            $("#tipoDoc option").remove();
-            $("#tipoDoc").append("<option>Seleccione</option>");
+            $(".tipoDoc option").remove();
+            $(".tipoDoc").append("<option>Seleccione</option>");
             x.forEach((item, index, array) => {
-                $("#tipoDoc").append("<option value="+item.tidoId+">"+item.tidoNombre+"</option>");
+                if (item.tidoId === selected) {
+                    $(".tipoDoc").append("<option selected value=" + item.tidoId + ">" + item.tidoNombre + "</option>");
+                } else {
+                    $(".tipoDoc").append("<option value=" + item.tidoId + ">" + item.tidoNombre + "</option>");
+                }
             });
         }
     });
 }
 
 $("#nuevo").click(function () {
-    listarTipoDocumento();
+    listarTipoDocumento(0);
 });
 function editar(id) {
     $.ajax({
@@ -57,6 +61,7 @@ function editar(id) {
             $("#edit_nombres").val(w.persNombres);
             $("#edit_dni").val(w.persDni);
             $("#edit_telefono").val(w.persTelefono);
+            listarTipoDocumento(w.tipoDocumento.tidoId);
         }
     });
     $("#editarModal").modal('show');
@@ -154,7 +159,10 @@ $("#modificar").click(function () {
             persApMaterno: $("#edit_apMaterno").val(),
             persNombres: $("#edit_nombres").val(),
             persDni: $("#edit_dni").val(),
-            persTelefono: $("#edit_telefono").val()
+            persTelefono: $("#edit_telefono").val(),
+            tipoDocumento: {
+                tidoId: $("#edit_tipoDoc").val()
+            }
         }),
         cache: false,
         success: function (w) {
