@@ -13,6 +13,7 @@ function listar() {
                             <td>" + (index + 1) + "</td>\n\
                             <td>" + item.persApPaterno + " " + item.persApMaterno + "</td>\n\
                             <td>" + item.persNombres + "</td>\n\
+                            <td>" + item.tipoDocumento.tidoNombre + "</td>\n\
                             <td>" + item.persDni + "</td>\n\
                             <td>" + item.persTelefono + "</td>\n\
                             <td style='text-align: center'>\n\
@@ -27,6 +28,24 @@ function listar() {
         }
     });
 }
+
+function listarTipoDocumento() {
+    $.ajax({
+        url: "/tipoDocumento/all",
+        type: 'GET',
+        success: function (x) {
+            $("#tipoDoc option").remove();
+            $("#tipoDoc").append("<option>Seleccione</option>");
+            x.forEach((item, index, array) => {
+                $("#tipoDoc").append("<option value="+item.tidoId+">"+item.tidoNombre+"</option>");
+            });
+        }
+    });
+}
+
+$("#nuevo").click(function () {
+    listarTipoDocumento();
+});
 function editar(id) {
     $.ajax({
         url: "/persona/" + id,
@@ -96,7 +115,10 @@ $("#guardar").click(function () {
             persNombres: $("#nombres").val(),
             persDni: $("#dni").val(),
             persTelefono: $("#telefono").val(),
-            persEstado: true
+            persEstado: true,
+            tipoDocumento: {
+                tidoId: $("#tipoDoc").val()
+            }
         }),
         cache: false,
         success: function (w) {

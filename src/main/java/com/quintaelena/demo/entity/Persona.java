@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.Data;
 
@@ -44,4 +46,8 @@ public class Persona implements Serializable {
 
     @Column(name = "pers_estado")
     private String persEstado;
+
+    @ManyToOne
+    @JoinColumn(name = "tido_id")
+    private TipoDocumento tipoDocumento;
 }

@@ -4,7 +4,7 @@
  */
 package com.quintaelena.demo.repository;
 
-import com.quintaelena.demo.entity.Persona;
+import com.quintaelena.demo.entity.TipoDocumento;
 import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.repository.CrudRepository;
@@ -14,7 +14,6 @@ import org.springframework.data.repository.CrudRepository;
  * @author 51950
  */
 @Repository
-public interface PersonaRepository extends CrudRepository<Persona, Long> {
+public interface TipoDocumentoRepository extends CrudRepository<TipoDocumento, Long> {
 
-    List<Persona> findByTipoDocumento(Long tidoId);
 }
